@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog: Tablas Hash - Estructura de Datos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>🔐 Blog Tablas Hash</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#post1" class="nav-link">Post 1: Introducción</a></li>
+                    <li><a href="#post2" class="nav-link">Post 2: Colisiones</a></li>
+                    <li><a href="#post3" class="nav-link">Post 3: Operaciones</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- POST 1: Introducción a Tablas Hash -->
+        <article id="post1" class="post">
+            <div class="post-header">
+                <h2>Post #1: Introducción a las Tablas Hash</h2>
+                <p class="post-date">📅 Noviembre 20, 2025</p>
+            </div>
+            
+            <section class="post-content">
+                <!-- ¿Qué es una Tabla Hash? -->
+                <div class="section">
+                    <h3>¿Qué es una Tabla Hash?</h3>
+                    <p>
+                        Una <strong>tabla hash</strong> (hash table) es una estructura de datos que implementa un 
+                        <strong>diccionario asociativo</strong>, una estructura que mapea claves a valores. 
+                        Utiliza una <strong>función hash</strong> para computar un índice en un arreglo de buckets o slots, 
+                        desde los cuales se puede encontrar el valor deseado.
+                    </p>
+                    <div class="highlight">
+                        <p>
+                            <strong>En simple:</strong> Es una forma super rápida de almacenar y recuperar información 
+                            usando pares clave-valor, como un diccionario pero optimizado para velocidad.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Conceptos Clave -->
+                <div class="section">
+                    <h3>Conceptos Clave</h3>
+                    
+                    <div class="concept">
+                        <h4>🔑 Clave (Key)</h4>
+                        <p>Es el identificador único que usamos para almacenar y recuperar datos. 
+                           Ejemplos: nombres de usuarios, IDs, correos electrónicos.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h4>📦 Valor (Value)</h4>
+                        <p>Es la información asociada a la clave. Puede ser cualquier tipo de dato: 
+                           un número, texto, objeto, etc.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h4>⚡ Función Hash</h4>
+                        <p>Una función matemática que toma una clave y produce un índice numérico. 
+                           Características:</p>
+                        <ul>
+                            <li>Debe ser <strong>determinista</strong>: misma clave → mismo índice</li>
+                            <li>Debe <strong>distribuir uniformemente</strong> los valores</li>
+                            <li>Debe ser <strong>rápida</strong> de calcular</li>
+                        </ul>
+                        <div class="code-example">
+                            <code>hash(clave) = clave % tamaño_tabla</code>
+                        </div>
+                    </div>
+
+                    <div class="concept">
+                        <h4>📍 Índice</h4>
+                        <p>El resultado de la función hash que indica dónde se almacenará el par clave-valor 
+                           en la tabla. Siempre está entre 0 y tamaño_tabla - 1.</p>
+                    </div>
+
+                    <div class="concept">
+                        <h4>💥 Colisiones</h4>
+                        <p>Ocurren cuando dos claves diferentes generan el mismo índice. 
+                           Ejemplo: hash("Ana") = 3 y hash("Eva") = 3 (ambas van al índice 3).</p>
+                    </div>
+                </div>
+
+                <!-- ¿Por qué son tan eficientes? -->
+                <div class="section">
+                    <h3>¿Por qué son tan Eficientes?</h3>
+                    <p>Las tablas hash ofrecen un rendimiento promedio excepcional:</p>
+                    
+                    <table class="complexity-table">
+                        <thead>
+                            <tr>
+                                <th>Operación</th>
+                                <th>Caso Promedio</th>
+                                <th>Caso Peor</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Insertar</strong></td>
+                                <td class="good">O(1)</td>
+                                <td class="bad">O(n)</td>
+                                <td>Muy rápido normalmente</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Buscar</strong></td>
+                                <td class="good">O(1)</td>
+                                <td class="bad">O(n)</td>
+                                <td>Acceso directo al índice</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Eliminar</strong></td>
+                                <td class="good">O(1)</td>
+                                <td class="bad">O(n)</td>
+                                <td>Eliminación directa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="highlight">
+                        <p>
+                            <strong>¿Por qué O(1)?</strong> La función hash nos lleva directamente al lugar donde 
+                            está el dato sin necesidad de buscar linealmente. Es como tener un mapa que te dice exactamente 
+                            dónde buscar.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo Visual -->
+                <div class="section">
+                    <h3>Ejemplo Visual: Tabla Hash en Acción</h3>
+                    
+                    <div class="visual-container">
+                        <h4>Paso 1: Función Hash genera un índice</h4>
+                        <svg class="diagram" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Entrada (Clave) -->
+                            <rect x="20" y="20" width="120" height="50" fill="#4CAF50" stroke="#333" stroke-width="2" rx="5"/>
+                            <text x="80" y="50" text-anchor="middle" fill="white" font-size="16" font-weight="bold">
+                                Clave: "Juan"
+                            </text>
+
+                            <!-- Flecha -->
+                            <path d="M 160 45 L 220 45" stroke="#333" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                            <!-- Función Hash -->
+                            <rect x="220" y="15" width="140" height="60" fill="#2196F3" stroke="#333" stroke-width="2" rx="5"/>
+                            <text x="290" y="45" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
+                                hash("Juan")
+                            </text>
+                            <text x="290" y="62" text-anchor="middle" fill="white" font-size="12">
+                                = 2
+                            </text>
+
+                            <!-- Flecha -->
+                            <path d="M 370 45 L 430 45" stroke="#333" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+                            <!-- Índice -->
+                            <rect x="430" y="20" width="120" height="50" fill="#FF9800" stroke="#333" stroke-width="2" rx="5"/>
+                            <text x="490" y="50" text-anchor="middle" fill="white" font-size="16" font-weight="bold">
+                                Índice: 2
+                            </text>
+
+                            <!-- Flecha -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="#333" />
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <div class="visual-container">
+                        <h4>Paso 2: Inserción en la Tabla Hash</h4>
+                        <svg class="diagram" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Arreglo (Tabla Hash) -->
+                            <text x="20" y="25" font-size="14" font-weight="bold">Tabla Hash:</text>
+                            
+                            <!-- Índice 0 -->
+                            <rect x="50" y="40" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="90" y="60" text-anchor="middle" font-size="12" font-weight="bold">[0]</text>
+                            <text x="90" y="80" text-anchor="middle" font-size="11" fill="#666">vacío</text>
+
+                            <!-- Índice 1 -->
+                            <rect x="140" y="40" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="180" y="60" text-anchor="middle" font-size="12" font-weight="bold">[1]</text>
+                            <text x="180" y="80" text-anchor="middle" font-size="11" fill="#666">vacío</text>
+
+                            <!-- Índice 2 - CON DATO -->
+                            <rect x="230" y="40" width="80" height="50" fill="#FFF3E0" stroke="#FF9800" stroke-width="3"/>
+                            <text x="270" y="60" text-anchor="middle" font-size="12" font-weight="bold">[2]</text>
+                            <text x="270" y="80" text-anchor="middle" font-size="10" fill="#333">Juan</text>
+
+                            <!-- Índice 3 -->
+                            <rect x="320" y="40" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="360" y="60" text-anchor="middle" font-size="12" font-weight="bold">[3]</text>
+                            <text x="360" y="80" text-anchor="middle" font-size="11" fill="#666">vacío</text>
+
+                            <!-- Índice 4 -->
+                            <rect x="410" y="40" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="450" y="60" text-anchor="middle" font-size="12" font-weight="bold">[4]</text>
+                            <text x="450" y="80" text-anchor="middle" font-size="11" fill="#666">vacío</text>
+
+                            <!-- Leyenda -->
+                            <text x="20" y="140" font-size="13" font-weight="bold">Ejemplo con más datos:</text>
+
+                            <!-- Índice 0 -->
+                            <rect x="50" y="155" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="90" y="175" text-anchor="middle" font-size="12" font-weight="bold">[0]</text>
+                            <text x="90" y="195" text-anchor="middle" font-size="10" fill="#333">Carlos</text>
+
+                            <!-- Índice 1 -->
+                            <rect x="140" y="155" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="180" y="175" text-anchor="middle" font-size="12" font-weight="bold">[1]</text>
+                            <text x="180" y="195" text-anchor="middle" font-size="10" fill="#333">María</text>
+
+                            <!-- Índice 2 - CON DATO -->
+                            <rect x="230" y="155" width="80" height="50" fill="#FFF3E0" stroke="#FF9800" stroke-width="3"/>
+                            <text x="270" y="175" text-anchor="middle" font-size="12" font-weight="bold">[2]</text>
+                            <text x="270" y="195" text-anchor="middle" font-size="10" fill="#333">Juan</text>
+
+                            <!-- Índice 3 -->
+                            <rect x="320" y="155" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="360" y="175" text-anchor="middle" font-size="12" font-weight="bold">[3]</text>
+                            <text x="360" y="195" text-anchor="middle" font-size="10" fill="#333">Pedro</text>
+
+                            <!-- Índice 4 -->
+                            <rect x="410" y="155" width="80" height="50" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                            <text x="450" y="175" text-anchor="middle" font-size="12" font-weight="bold">[4]</text>
+                            <text x="450" y="195" text-anchor="middle" font-size="10" fill="#333">Ana</text>
+
+                            <!-- Nota -->
+                            <text x="20" y="280" font-size="12" fill="#666">
+                                Nota: Cada clave se almacena en su índice correspondiente calculado por la función hash
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+            </section>
+        </article>
+
+        <!-- POST 2: Manejo de Colisiones -->
+        <article id="post2" class="post">
+            <div class="post-header">
+                <h2>Post #2: Manejo de Colisiones en Tablas Hash</h2>
+                <p class="post-date">📅 Noviembre 20, 2025</p>
+            </div>
+
+            <section class="post-content">
+                <div class="section">
+                    <h3>¿Qué es una Colisión?</h3>
+                    <p>
+                        Una <strong>colisión</strong> ocurre cuando dos claves diferentes producen el mismo índice hash. 
+                        Es inevitable en la mayoría de los casos prácticos, por eso existen estrategias para manejarlas.
+                    </p>
+                    <div class="highlight danger">
+                        <p>
+                            <strong>Ejemplo de colisión:</strong>
+                            Si tenemos una tabla de tamaño 5 y aplicamos hash(x) = x % 5:
+                            <br>
+                            hash(7) = 2 y hash(12) = 2 → ¡Colisión!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Estrategia 1: Encadenamiento -->
+                <div class="section">
+                    <h3>✔ Estrategia 1: Encadenamiento (Chaining)</h3>
+                    <p>
+                        En esta estrategia, cada posición de la tabla hash contiene una <strong>lista enlazada</strong> 
+                        que almacena todos los pares clave-valor que mapean a ese índice.
+                    </p>
+
+                    <h4>Características:</h4>
+                    <ul>
+                        <li>✅ <strong>Fácil de implementar</strong>: Solo necesitas listas enlazadas</li>
+                        <li>✅ <strong>Crece dinámicamente</strong>: No hay límite de colisiones</li>
+                        <li>✅ <strong>Seguro</strong>: Siempre funcionará sin importar colisiones</li>
+                        <li>❌ <strong>Más memoria</strong>: Requiere espacio para los punteros</li>
+                        <li>❌ <strong>Más lento con muchas colisiones</strong>: O(n) en el peor caso</li>
+                    </ul>
+
+                    <div class="visual-container">
+                        <h4>Visualización: Encadenamiento con Colisiones</h4>
+                        <svg class="diagram" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Título -->
+                            <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="bold">
+                                Tabla Hash con Chaining
+                            </text>
+
+                            <!-- Tabla base -->
+                            <text x="20" y="55" font-size="12" font-weight="bold">Tabla:</text>
+
+                            <!-- Índice 0 -->
+                            <rect x="50" y="65" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="80" y="92" text-anchor="middle" font-size="11" font-weight="bold">[0]</text>
+
+                            <!-- Índice 1 con lista -->
+                            <rect x="120" y="65" width="60" height="40" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+                            <text x="150" y="92" text-anchor="middle" font-size="11" font-weight="bold">[1]</text>
+
+                            <!-- Flecha y primer nodo lista 1 -->
+                            <path d="M 150 110 L 150 130" stroke="#FF9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <rect x="120" y="130" width="60" height="50" fill="#FFF9C4" stroke="#FF9800" stroke-width="2" rx="3"/>
+                            <text x="150" y="150" text-anchor="middle" font-size="10" font-weight="bold">"Ana"</text>
+                            <text x="150" y="167" text-anchor="middle" font-size="9" fill="#666">→</text>
+
+                            <!-- Segundo nodo lista 1 -->
+                            <path d="M 180 155 L 210 155" stroke="#FF9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <rect x="210" y="130" width="60" height="50" fill="#FFF9C4" stroke="#FF9800" stroke-width="2" rx="3"/>
+                            <text x="240" y="150" text-anchor="middle" font-size="10" font-weight="bold">"Eva"</text>
+                            <text x="240" y="167" text-anchor="middle" font-size="9" fill="#666">→ null</text>
+
+                            <!-- Índice 2 -->
+                            <rect x="190" y="65" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="220" y="92" text-anchor="middle" font-size="11" font-weight="bold">[2]</text>
+
+                            <!-- Índice 3 con lista -->
+                            <rect x="260" y="65" width="60" height="40" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+                            <text x="290" y="92" text-anchor="middle" font-size="11" font-weight="bold">[3]</text>
+
+                            <!-- Flecha y nodo lista 3 -->
+                            <path d="M 290 110 L 290 130" stroke="#FF9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <rect x="260" y="130" width="60" height="50" fill="#FFF9C4" stroke="#FF9800" stroke-width="2" rx="3"/>
+                            <text x="290" y="150" text-anchor="middle" font-size="10" font-weight="bold">"Luis"</text>
+                            <text x="290" y="167" text-anchor="middle" font-size="9" fill="#666">→ null</text>
+
+                            <!-- Índice 4 -->
+                            <rect x="330" y="65" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="360" y="92" text-anchor="middle" font-size="11" font-weight="bold">[4]</text>
+
+                            <!-- Leyenda -->
+                            <text x="50" y="250" font-size="12" font-weight="bold">Explicación:</text>
+                            <text x="50" y="275" font-size="11">
+                                • Índice [1] tiene COLISIÓN: "Ana" y "Eva" mapean al mismo índice
+                            </text>
+                            <text x="50" y="300" font-size="11">
+                                • Se usa una lista enlazada para almacenar ambos pares
+                            </text>
+                            <text x="50" y="325" font-size="11">
+                                • Para buscar "Eva": vamos a índice 1 → recorremos lista → encontramos "Eva"
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Estrategia 2: Direccionamiento Abierto -->
+                <div class="section">
+                    <h3>✔ Estrategia 2: Direccionamiento Abierto (Open Addressing)</h3>
+                    <p>
+                        En esta estrategia, si un índice está ocupado, se busca otro índice libre según una 
+                        secuencia definida. Todo se almacena en el mismo arreglo.
+                    </p>
+
+                    <h4>Características:</h4>
+                    <ul>
+                        <li>✅ <strong>Mejor localidad de caché</strong>: Todo en un arreglo contiguo</li>
+                        <li>✅ <strong>Menos memoria</strong>: No hay punteros adicionales</li>
+                        <li>✅ <strong>Mayor rendimiento</strong> en algunos casos</li>
+                        <li>❌ <strong>Más complejo</strong> de implementar</li>
+                        <li>❌ <strong>Agrupamiento</strong>: Los datos tienden a agruparse</li>
+                        <li>❌ <strong>Tamaño fijo</strong>: La tabla tiene un límite</li>
+                    </ul>
+
+                    <h4>Métodos de Direccionamiento Abierto:</h4>
+
+                    <!-- Linear Probing -->
+                    <div class="subsection">
+                        <h5>1️⃣ Linear Probing (Exploración Lineal)</h5>
+                        <p>
+                            Si el índice está ocupado, prueba el siguiente índice, luego el siguiente, etc.
+                        </p>
+                        <div class="code-example">
+                            <code>índice_prueba = (hash(clave) + i) % tamaño</code>
+                            <br><code>donde i = 0, 1, 2, 3, ...</code>
+                        </div>
+                        <p><strong>Problema:</strong> Agrupamiento primario (clustering)</p>
+                    </div>
+
+                    <!-- Quadratic Probing -->
+                    <div class="subsection">
+                        <h5>2️⃣ Quadratic Probing (Exploración Cuadrática)</h5>
+                        <p>
+                            En lugar de avanzar linealmente, avanza de forma cuadrática.
+                        </p>
+                        <div class="code-example">
+                            <code>índice_prueba = (hash(clave) + i²) % tamaño</code>
+                            <br><code>donde i = 0, 1, 2, 3, ...</code>
+                        </div>
+                        <p><strong>Ventaja:</strong> Reduce el agrupamiento</p>
+                    </div>
+
+                    <!-- Double Hashing -->
+                    <div class="subsection">
+                        <h5>3️⃣ Double Hashing (Hash Doble)</h5>
+                        <p>
+                            Usa una segunda función hash para determinar el incremento.
+                        </p>
+                        <div class="code-example">
+                            <code>índice_prueba = (hash1(clave) + i * hash2(clave)) % tamaño</code>
+                            <br><code>donde i = 0, 1, 2, 3, ...</code>
+                        </div>
+                        <p><strong>Ventaja:</strong> Mejor distribución, sin agrupamiento</p>
+                    </div>
+                </div>
+
+                <!-- Comparación Visual -->
+                <div class="section">
+                    <h3>Comparación Visual: Linear Probing con Colisiones</h3>
+                    
+                    <div class="visual-container">
+                        <h4>Inserción de datos: "Ana", "Eva", "Luis"</h4>
+                        <svg class="diagram" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Paso 1 -->
+                            <text x="50" y="30" font-size="13" font-weight="bold">Paso 1: Insertar "Ana" (hash = 1)</text>
+                            
+                            <!-- Tabla 1 -->
+                            <rect x="50" y="50" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="75" y="75" text-anchor="middle" font-size="11">[0]</text>
+
+                            <rect x="110" y="50" width="50" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="135" y="75" text-anchor="middle" font-size="11" font-weight="bold">Ana</text>
+
+                            <rect x="170" y="50" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="195" y="75" text-anchor="middle" font-size="11">[2]</text>
+
+                            <rect x="230" y="50" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="255" y="75" text-anchor="middle" font-size="11">[3]</text>
+
+                            <rect x="290" y="50" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="315" y="75" text-anchor="middle" font-size="11">[4]</text>
+
+                            <!-- Paso 2 -->
+                            <text x="50" y="135" font-size="13" font-weight="bold">Paso 2: Insertar "Eva" (hash = 1) ❌ COLISIÓN</text>
+                            <text x="50" y="155" font-size="11" fill="#d32f2f">❌ Índice 1 está ocupado. Probamos índice 2...</text>
+                            
+                            <!-- Tabla 2 -->
+                            <rect x="50" y="175" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="75" y="200" text-anchor="middle" font-size="11">[0]</text>
+
+                            <rect x="110" y="175" width="50" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="135" y="200" text-anchor="middle" font-size="11" font-weight="bold">Ana</text>
+
+                            <rect x="170" y="175" width="50" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="195" y="200" text-anchor="middle" font-size="11" font-weight="bold">Eva</text>
+
+                            <rect x="230" y="175" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="255" y="200" text-anchor="middle" font-size="11">[3]</text>
+
+                            <rect x="290" y="175" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="315" y="200" text-anchor="middle" font-size="11">[4]</text>
+
+                            <text x="50" y="245" font-size="11" fill="#2e7d32">✅ Eva se coloca en índice 2</text>
+
+                            <!-- Paso 3 -->
+                            <text x="50" y="280" font-size="13" font-weight="bold">Paso 3: Insertar "Luis" (hash = 1) ❌ COLISIÓN</text>
+                            <text x="50" y="300" font-size="11" fill="#d32f2f">❌ Índice 1 ocupado, índice 2 ocupado. Probamos índice 3...</text>
+                            
+                            <!-- Tabla 3 -->
+                            <rect x="50" y="320" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="75" y="345" text-anchor="middle" font-size="11">[0]</text>
+
+                            <rect x="110" y="320" width="50" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="135" y="345" text-anchor="middle" font-size="11" font-weight="bold">Ana</text>
+
+                            <rect x="170" y="320" width="50" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="195" y="345" text-anchor="middle" font-size="11" font-weight="bold">Eva</text>
+
+                            <rect x="230" y="320" width="50" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="255" y="345" text-anchor="middle" font-size="11" font-weight="bold">Luis</text>
+
+                            <rect x="290" y="320" width="50" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="315" y="345" text-anchor="middle" font-size="11">[4]</text>
+
+                            <text x="50" y="390" font-size="11" fill="#2e7d32">✅ Luis se coloca en índice 3</text>
+
+                            <!-- Nota importante -->
+                            <rect x="400" y="50" width="350" height="350" fill="#F5F5F5" stroke="#999" stroke-width="1" stroke-dasharray="5,5" rx="5"/>
+                            <text x="575" y="75" text-anchor="middle" font-size="12" font-weight="bold">Búsqueda de "Eva":</text>
+                            <text x="420" y="100" font-size="11">1. Calcular hash("Eva") = 1</text>
+                            <text x="420" y="125" font-size="11">2. Ir a índice [1] → encuentra "Ana"</text>
+                            <text x="420" y="150" font-size="11">3. No es "Eva", intenta siguiente</text>
+                            <text x="420" y="175" font-size="11">4. Ir a índice [2] → encuentra "Eva"</text>
+                            <text x="420" y="200" font-size="11">5. ¡Éxito! Devuelve "Eva"</text>
+                            <text x="420" y="235" font-size="11" font-weight="bold" fill="#d32f2f">
+                                Problema: Agrupamiento
+                            </text>
+                            <text x="420" y="260" font-size="10">
+                                Los datos se agrupan en
+                            </text>
+                            <text x="420" y="280" font-size="10">
+                                índices consecutivos, haciendo
+                            </text>
+                            <text x="420" y="300" font-size="10">
+                                que las búsquedas sean más lentas.
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Tabla Comparativa -->
+                <div class="section">
+                    <h3>Tabla Comparativa: Chaining vs Open Addressing</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Aspecto</th>
+                                <th>Chaining</th>
+                                <th>Open Addressing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Complejidad</strong></td>
+                                <td>Fácil de implementar</td>
+                                <td>Más compleja</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Memoria</strong></td>
+                                <td>Requiere punteros (más memoria)</td>
+                                <td>Solo arreglo (menos memoria)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Límite</strong></td>
+                                <td>Sin límite teórico</td>
+                                <td>Limitado al tamaño de la tabla</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rendimiento</strong></td>
+                                <td>Bueno con factor de carga alto</td>
+                                <td>Mejor con factor bajo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Agrupamiento</strong></td>
+                                <td>No hay</td>
+                                <td>Puede haber (especialmente Linear)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Eliminación</strong></td>
+                                <td>Directa (eliminar nodo)</td>
+                                <td>Marcar como "deleted"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </article>
+
+        <!-- POST 3: Implementación y Operaciones -->
+        <article id="post3" class="post">
+            <div class="post-header">
+                <h2>Post #3: Implementación y Operaciones Fundamentales</h2>
+                <p class="post-date">📅 Noviembre 20, 2025</p>
+            </div>
+
+            <section class="post-content">
+                <div class="section">
+                    <h3>Las Tres Operaciones Fundamentales</h3>
+                    <p>
+                        Una tabla hash implementa tres operaciones básicas que son la base de su utilidad. 
+                        Veamos cómo funcionan en detalle.
+                    </p>
+                </div>
+
+                <!-- OPERACIÓN 1: INSERTAR -->
+                <div class="section">
+                    <h3>🔹 Operación 1: Insertar (PUT)</h3>
+                    <p>
+                        Almacenar un nuevo par clave-valor en la tabla hash.
+                    </p>
+
+                    <h4>Proceso paso a paso:</h4>
+                    <ol class="process-list">
+                        <li><strong>Calcular hash</strong>: Aplicar la función hash a la clave</li>
+                        <li><strong>Obtener índice</strong>: Reducir el hash al rango de la tabla</li>
+                        <li><strong>Resolver colisiones</strong>: Si hay colisión, usar la estrategia configurada</li>
+                        <li><strong>Almacenar</strong>: Guardar el par clave-valor en la posición</li>
+                    </ol>
+
+                    <h4>Pseudocódigo:</h4>
+                    <div class="code-example">
+                        <pre><code>función PUT(clave, valor):
+    índice = hash(clave) % tamaño
+    
+    SI es Chaining:
+        lista = tabla[índice]
+        lista.agregar(clave, valor)
+    
+    SI es Open Addressing:
+        i = 0
+        MIENTRAS tabla[índice] no está vacío:
+            índice = (hash(clave) + f(i)) % tamaño
+            i = i + 1
+        tabla[índice] = (clave, valor)</code></pre>
+                    </div>
+
+                    <h4>Complejidad:</h4>
+                    <ul>
+                        <li><strong>Promedio:</strong> O(1)</li>
+                        <li><strong>Peor caso:</strong> O(n) - cuando hay muchas colisiones</li>
+                    </ul>
+                </div>
+
+                <!-- OPERACIÓN 2: BUSCAR -->
+                <div class="section">
+                    <h3>🔹 Operación 2: Buscar (GET)</h3>
+                    <p>
+                        Recuperar el valor asociado a una clave.
+                    </p>
+
+                    <h4>Proceso paso a paso:</h4>
+                    <ol class="process-list">
+                        <li><strong>Calcular hash</strong>: hash(clave) para obtener el índice inicial</li>
+                        <li><strong>Ir al índice</strong>: Acceder directamente a la posición</li>
+                        <li><strong>Comparar</strong>: Verificar si la clave coincide</li>
+                        <li><strong>Continuar si no coincide</strong>: Usar la estrategia de colisión</li>
+                        <li><strong>Retornar o null</strong>: Valor encontrado o no existe</li>
+                    </ol>
+
+                    <h4>Pseudocódigo:</h4>
+                    <div class="code-example">
+                        <pre><code>función GET(clave):
+    índice = hash(clave) % tamaño
+    
+    SI es Chaining:
+        lista = tabla[índice]
+        PARA cada (k, v) en lista:
+            SI k == clave:
+                RETORNAR v
+        RETORNAR null
+    
+    SI es Open Addressing:
+        i = 0
+        MIENTRAS tabla[índice] no está vacío:
+            SI tabla[índice].clave == clave:
+                RETORNAR tabla[índice].valor
+            índice = (hash(clave) + f(i)) % tamaño
+            i = i + 1
+        RETORNAR null</code></pre>
+                    </div>
+
+                    <h4>Complejidad:</h4>
+                    <ul>
+                        <li><strong>Promedio:</strong> O(1)</li>
+                        <li><strong>Peor caso:</strong> O(n)</li>
+                    </ul>
+                </div>
+
+                <!-- OPERACIÓN 3: ELIMINAR -->
+                <div class="section">
+                    <h3>🔹 Operación 3: Eliminar (DELETE)</h3>
+                    <p>
+                        Remover un par clave-valor de la tabla.
+                    </p>
+
+                    <h4>Proceso según la estrategia:</h4>
+
+                    <div class="subsection">
+                        <h5>Con Chaining:</h5>
+                        <ol class="process-list">
+                            <li>Calcular el índice usando hash(clave)</li>
+                            <li>Acceder a la lista enlazada en ese índice</li>
+                            <li>Buscar el nodo con la clave coincidente</li>
+                            <li>Eliminar el nodo de la lista</li>
+                            <li>Actualizar punteros de la lista</li>
+                        </ol>
+                        <p><strong>Ventaja:</strong> Es directo, solo eliminar el nodo</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h5>Con Open Addressing:</h5>
+                        <ol class="process-list">
+                            <li>Calcular el índice usando hash(clave)</li>
+                            <li>Buscar el elemento usando la secuencia de prueba</li>
+                            <li>NO eliminarlo directamente (romper búsquedas)</li>
+                            <li>Marcar la celda como "DELETED"</li>
+                            <li>Durante búsquedas, ignorar celdas "DELETED" pero seguir explorando</li>
+                        </ol>
+                        <p><strong>Razón:</strong> Eliminar directamente crearía "agujeros" que rompen las búsquedas</p>
+                    </div>
+
+                    <h4>Pseudocódigo (Chaining):</h4>
+                    <div class="code-example">
+                        <pre><code>función DELETE(clave):
+    índice = hash(clave) % tamaño
+    lista = tabla[índice]
+    
+    PARA cada nodo en lista:
+        SI nodo.clave == clave:
+            lista.eliminar(nodo)
+            RETORNAR verdadero
+    
+    RETORNAR falso  // No encontrado</code></pre>
+                    </div>
+
+                    <h4>Pseudocódigo (Open Addressing):</h4>
+                    <div class="code-example">
+                        <pre><code>función DELETE(clave):
+    índice = hash(clave) % tamaño
+    i = 0
+    
+    MIENTRAS tabla[índice] no está vacío:
+        SI tabla[índice].clave == clave:
+            tabla[índice] = DELETED  // Marcar como eliminado
+            RETORNAR verdadero
+        índice = (hash(clave) + f(i)) % tamaño
+        i = i + 1
+    
+    RETORNAR falso  // No encontrado</code></pre>
+                    </div>
+
+                    <h4>Complejidad:</h4>
+                    <ul>
+                        <li><strong>Promedio:</strong> O(1)</li>
+                        <li><strong>Peor caso:</strong> O(n)</li>
+                    </ul>
+                </div>
+
+                <!-- VISUALIZACIÓN COMPLETA -->
+                <div class="section">
+                    <h3>Visualización: Las 3 Operaciones en Acción</h3>
+
+                    <div class="visual-container">
+                        <h4>Ejemplo Completo: Inserción, Búsqueda y Eliminación</h4>
+                        <svg class="diagram" viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg">
+                            <!-- FASE 1: INSERCIÓN -->
+                            <text x="20" y="30" font-size="14" font-weight="bold">FASE 1: INSERCIÓN - tabla.put("Juan", 123)</text>
+                            
+                            <!-- Paso 1 -->
+                            <text x="30" y="60" font-size="12" font-weight="bold">Step 1: hash("Juan") = 2</text>
+                            <rect x="50" y="75" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="80" y="100" text-anchor="middle" font-size="11">[0]</text>
+
+                            <rect x="120" y="75" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="150" y="100" text-anchor="middle" font-size="11">[1]</text>
+
+                            <rect x="190" y="75" width="60" height="40" fill="#FFEBEE" stroke="#d32f2f" stroke-width="3"/>
+                            <text x="220" y="100" text-anchor="middle" font-size="11" font-weight="bold">[2]</text>
+
+                            <rect x="260" y="75" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="290" y="100" text-anchor="middle" font-size="11">[3]</text>
+
+                            <!-- Paso 2 -->
+                            <text x="30" y="150" font-size="12" font-weight="bold">Step 2: Insertar en índice [2]</text>
+                            <rect x="50" y="165" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="80" y="190" text-anchor="middle" font-size="11">[0]</text>
+
+                            <rect x="120" y="165" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="150" y="190" text-anchor="middle" font-size="11">[1]</text>
+
+                            <rect x="190" y="165" width="60" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="3"/>
+                            <text x="220" y="185" text-anchor="middle" font-size="10" font-weight="bold">Juan</text>
+                            <text x="220" y="200" text-anchor="middle" font-size="9">123</text>
+
+                            <rect x="260" y="165" width="60" height="40" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+                            <text x="290" y="190" text-anchor="middle" font-size="11">[3]</text>
+
+                            <!-- FASE 2: BÚSQUEDA -->
+                            <text x="20" y="260" font-size="14" font-weight="bold">FASE 2: BÚSQUEDA - valor = tabla.get("Juan")</text>
+                            
+                            <!-- Paso 1 -->
+                            <text x="30" y="290" font-size="12" font-weight="bold">Step 1: hash("Juan") = 2</text>
+                            <text x="30" y="310" font-size="11">→ Ir directamente al índice [2]</text>
+
+                            <!-- Paso 2 -->
+                            <text x="30" y="340" font-size="12" font-weight="bold">Step 2: Comparar claves</text>
+                            <rect x="50" y="355" width="60" height="40" fill="#FFF9C4" stroke="#FBC02D" stroke-width="2"/>
+                            <text x="80" y="375" text-anchor="middle" font-size="10" font-weight="bold">Juan</text>
+                            <text x="80" y="390" text-anchor="middle" font-size="9">123</text>
+
+                            <text x="120" y="375" font-size="11" font-weight="bold">✅ Encontrado!</text>
+
+                            <!-- Paso 3 -->
+                            <text x="30" y="430" font-size="12" font-weight="bold">Step 3: Retornar valor</text>
+                            <rect x="50" y="445" width="200" height="40" fill="#C8E6C9" stroke="#4CAF50" stroke-width="2" rx="5"/>
+                            <text x="150" y="472" text-anchor="middle" font-size="12" font-weight="bold">Retorna: 123</text>
+
+                            <!-- FASE 3: ELIMINACIÓN -->
+                            <text x="20" y="530" font-size="14" font-weight="bold">FASE 3: ELIMINACIÓN - tabla.delete("Juan")</text>
+                            
+                            <!-- Paso 1 -->
+                            <text x="30" y="560" font-size="12" font-weight="bold">Step 1: hash("Juan") = 2</text>
+                            <text x="30" y="580" font-size="11">→ Localizar el elemento</text>
+
+                            <!-- Paso 2 -->
+                            <text x="30" y="610" font-size="12" font-weight="bold">Step 2: Eliminar</text>
+                            <rect x="50" y="625" width="60" height="40" fill="#FFCCBC" stroke="#FF6F00" stroke-width="2" stroke-dasharray="5,5"/>
+                            <text x="80" y="653" text-anchor="middle" font-size="10" fill="#666">--</text>
+
+                            <text x="120" y="647" font-size="11" font-weight="bold">✅ Eliminado!</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- RESUMEN Y COMPLEJIDAD -->
+                <div class="section">
+                    <h3>Resumen: Complejidad de Operaciones</h3>
+                    
+                    <table class="complexity-table">
+                        <thead>
+                            <tr>
+                                <th>Operación</th>
+                                <th>Caso Promedio</th>
+                                <th>Caso Peor</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>PUT (Insertar)</strong></td>
+                                <td class="good">O(1)</td>
+                                <td class="bad">O(n)</td>
+                                <td>Calcular hash + insertar</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GET (Buscar)</strong></td>
+                                <td class="good">O(1)</td>
+                                <td class="bad">O(n)</td>
+                                <td>Acceso directo al índice</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DELETE (Eliminar)</strong></td>
+                                <td class="good">O(1)</td>
+                                <td class="bad">O(n)</td>
+                                <td>Localizar y eliminar</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="highlight">
+                        <p>
+                            <strong>¿Cuándo ocurre el peor caso?</strong>
+                            Cuando hay muchas colisiones y la tabla está poco balanceada. 
+                            Por eso es importante:
+                        </p>
+                        <ul>
+                            <li>✅ Usar una buena función hash (distribución uniforme)</li>
+                            <li>✅ Mantener un factor de carga bajo (elementos/tamaño < 0.75)</li>
+                            <li>✅ Expandir la tabla cuando sea necesario (rehashing)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FACTOR DE CARGA -->
+                <div class="section">
+                    <h3>Concepto Importante: Factor de Carga</h3>
+                    <p>
+                        El <strong>factor de carga</strong> es la relación entre la cantidad de elementos 
+                        y el tamaño de la tabla.
+                    </p>
+                    
+                    <div class="code-example">
+                        <code>Factor de Carga = cantidad_elementos / tamaño_tabla</code>
+                    </div>
+
+                    <div class="highlight">
+                        <p>
+                            <strong>Factor de Carga Óptimo:</strong>
+                        </p>
+                        <ul>
+                            <li><strong>Chaining:</strong> 0.75 - 1.0 (puede estar ocupado)</li>
+                            <li><strong>Open Addressing:</strong> 0.5 - 0.75 (debe estar semi-vacío)</li>
+                        </ul>
+                        <p style="margin-top: 15px;">
+                            Cuando el factor de carga excede el límite, la tabla se <strong>rehashea</strong> 
+                            (se expande y se reorganiza).
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- CONCLUSIÓN -->
+        <section class="conclusion">
+            <h2>🎯 Conclusión</h2>
+            <p>
+                Las tablas hash son una estructura de datos fundamental en programación. Su capacidad 
+                de proporcionar operaciones en <strong>O(1) en promedio</strong> las hace indispensables 
+                para aplicaciones que necesitan alta performance.
+            </p>
+            <div class="key-takeaways">
+                <h3>Puntos Clave:</h3>
+                <ul>
+                    <li>✅ Las tablas hash mapean claves a índices usando una función hash</li>
+                    <li>✅ Las colisiones son inevitables y se manejan con Chaining u Open Addressing</li>
+                    <li>✅ Las tres operaciones (PUT, GET, DELETE) son O(1) en promedio</li>
+                    <li>✅ El factor de carga determina el rendimiento de la tabla</li>
+                    <li>✅ Una buena función hash es crítica para la distribución uniforme</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Blog de Estructura de Datos. Tablas Hash - Conceptos Fundamentales</p>
+            <p>Desarrollado para entender las estructuras de datos más eficientes</p>
+        </div>
+    </footer>
+
+</body>
+</html>

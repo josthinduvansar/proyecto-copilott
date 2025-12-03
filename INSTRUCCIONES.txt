@@ -1,0 +1,69 @@
+# 🚀 INSTRUCCIONES PARA VISUALIZAR EL BLOG
+
+## Opción 1: Abrir directamente (Más Simple)
+1. Navega a la carpeta del proyecto
+2. Haz doble clic en `index.html`
+3. Se abrirá en tu navegador predeterminado
+
+## Opción 2: Usar un Servidor Local (Recomendado)
+
+### Usando Python (Recomendado si tienes Python instalado):
+
+**En Windows (PowerShell):**
+```powershell
+cd "c:\Users\Josthin\Desktop\CLASES\BACK\ESTRUCTURA DE DATOS 1-01\proyecto-copilot"
+python -m http.server 8000
+```
+
+Luego abre en el navegador: `http://localhost:8000`
+
+### Usando Live Server (Si usas VS Code):
+1. Instala la extensión "Live Server" en VS Code
+2. Haz clic derecho en `index.html`
+3. Selecciona "Open with Live Server"
+
+### Usando Node.js (Si tienes instalado):
+```bash
+npx http-server
+```
+
+## Contenido del Blog
+
+El blog contiene 3 posts principales sobre Tablas Hash:
+
+📌 **Post #1**: Introducción a las Tablas Hash
+- Qué es una tabla hash
+- Conceptos clave
+- Complejidad O(1)
+- Diagramas visuales
+
+📌 **Post #2**: Manejo de Colisiones
+- Encadenamiento (Chaining)
+- Direccionamiento Abierto
+- Linear Probing
+- Quadratic Probing
+- Double Hashing
+
+📌 **Post #3**: Implementación y Operaciones
+- Insertar (PUT)
+- Buscar (GET)
+- Eliminar (DELETE)
+- Factor de carga
+
+## Características
+
+✅ Diseño moderno y responsive
+✅ Diagramas SVG interactivos
+✅ Pseudocódigo explicado
+✅ Tablas comparativas
+✅ Compatible con móviles
+✅ Sin dependencias externas
+
+## Archivos del Proyecto
+
+- `index.html` - Contenido del blog (todo el contenido)
+- `style.css` - Estilos y diseño
+- `README_BLOG.md` - Documentación detallada del blog
+- `INSTRUCCIONES.txt` - Este archivo
+
+¡Disfruta aprendiendo sobre Tablas Hash! 🎉
